@@ -1,50 +1,31 @@
 
-
-MIN = 0
-MAX = 20
-
 steps = 0
 def foo(n):
     global steps
-    # print(n)
-
     if len(str(n)) == 1:
-        # print('Done : steps = ', steps)
-        # return 'Done'
         return steps
+    steps += 1;
+    return foo( eval('*'.join([ x for x in str(n) ])) )
 
-    string = '*'.join([ x for x in str(n) ])
-    steps += 1
-    return foo(eval(string))
-
-def r(n):
-    string = '*'.join([ x for x in str(n) ])
-    print(eval(string))
+def r( n ):
+    string = '*'.join([ x for x in str( n ) ])
+    print(eval( string ))
 
 def diz(n,d):
     c,r = 0,n
-
     while True:
         rf = r / d
-        isint = (rf-int(rf)) == 0
-        if not isint: break
-        c += 1
-        r = rf
-
+        if not ((rf-int(rf)) == 0): break
+        c += 1; r = rf
     return c
 
-def d(n):
+def d( n ):
     dig = [int(x) for x in str(n)]
-    # print( dig )
     c2,c3,c7 = 0,0,0
-
     for x in dig:
         c2 += diz(x,2)
         c3 += diz(x,3)
         c7 += diz(x,7)
-
-    print(c2,c3,c7)
-
 
 def nn(r,min,max):
     global steps
@@ -54,7 +35,8 @@ def nn(r,min,max):
         for y in range(min,max):
             for z in range(min,max):
                 number = "2"*x + "3"*y + "7"*z
-                if number == '':continue
+                if number == '':
+                    continue
 
                 steps = 0
                 steps = foo(number)
@@ -71,4 +53,4 @@ for x in pp:
     print('-'*20+ ': ' + str(x),steps)
 
 # nn( number of steps, minmum multiplayer, maxmum multiplayer )
-nn( 11, 0, 50 )
+nn( 9 , 0, 50 )
